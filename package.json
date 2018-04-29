@@ -1,0 +1,22 @@
+{
+  "name": "callbag-from-function",
+  "version": "1.0.0",
+  "description": "Create a callbag source from a function",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krawaller/callbag-from-function.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "author": "David Waller",
+  "license": "MIT",
+  "keywords": [
+    "callbag"
+  ],
+  "devDependencies": {
+    "callbag-mock": "^1.0.0",
+    "tape": "^4.9.0"
+  }
+}
