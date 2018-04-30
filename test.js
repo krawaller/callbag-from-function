@@ -27,3 +27,9 @@ test('it emits function return values until unsub', t => {
 
   t.end();
 });
+
+test('the emitter passes on the return value', t => {
+  const {source, emitter} = fromFunction(() => 'foo');
+  t.equal(emitter(), 'foo', 'return value is passed along');
+  t.end();
+});

@@ -13,9 +13,11 @@ module.exports = function fromFunction(func) {
   };
 
   const emitter = function(...args){
+    const ret = func(...args);
     if (listenerTalkback){
-      listenerTalkback(1, func(...args));
+      listenerTalkback(1, ret);
     }
+    return ret;
   };
 
   return {source, emitter};

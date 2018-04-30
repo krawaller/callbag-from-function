@@ -12,6 +12,8 @@ const {source, emitter} = fromFunction(someFunc);
 
 Now, whenever you call `emitter` with some `...args`, `source` will emit what `someFunc` returns when called with `...args`.
 
+The `emitter` will also return the emitted value.
+
 
 ## example
 
