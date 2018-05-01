@@ -1,4 +1,4 @@
-module.exports = function fromFunction(func) {
+module.exports = function fromFunction(func = a => a) {
 
   let listenerTalkback;
 

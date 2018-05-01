@@ -33,3 +33,14 @@ test('the emitter passes on the return value', t => {
   t.equal(emitter(), 'foo', 'return value is passed along');
   t.end();
 });
+
+test('it should default to identity function', t => {
+  let received = [];
+  const report = (name,dir,t,d) => t === 1 && received.push(d);
+  const sink = makeMock('sink', report);
+  const {source, emitter} = fromFunction();
+  source(0, sink);
+  emitter('foo');
+  t.deepEqual(received, ['foo']);
+  t.end();
+});

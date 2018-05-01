@@ -14,6 +14,8 @@ Now, whenever you call `emitter` with some `...args`, `source` will emit what `s
 
 The `emitter` will also return the emitted value.
 
+If no function is passed in, an `identity` function will be used.
+
 
 ## example
 
