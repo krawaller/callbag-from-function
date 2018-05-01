@@ -16,6 +16,7 @@ The `emitter` will also return the emitted value.
 
 If no function is passed in, an `identity` function will be used.
 
+The `source` is "hot" (using [callbag-share](https://github.com/staltz/callbag-share)), meaning it can take many listeners.
 
 ## example
 

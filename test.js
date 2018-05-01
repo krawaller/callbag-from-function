@@ -44,3 +44,16 @@ test('it should default to identity function', t => {
   t.deepEqual(received, ['foo']);
   t.end();
 });
+
+test('the source should be shared', t => {
+  let first, second;
+  const sink1 = makeMock('sink1', (name,dir,t,d) => t === 1 && (first = true));
+  const sink2 = makeMock('sink2', (name,dir,t,d) => t === 1 && (second = true));
+  const {source, emitter} = fromFunction();
+  source(0, sink1);
+  source(0, sink2);
+  emitter();
+  t.ok(first);
+  t.ok(second);
+  t.end();
+});

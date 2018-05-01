@@ -1,8 +1,10 @@
+const share = require('callbag-share');
+
 module.exports = function fromFunction(func = a => a) {
 
   let listenerTalkback;
 
-  const source = (t, d) => {
+  const source = share((t, d) => {
     if (t !== 0) return;
     listenerTalkback = d;
     listenerTalkback(0, (st, sd) => {
@@ -10,7 +12,7 @@ module.exports = function fromFunction(func = a => a) {
         listenerTalkback = undefined;
       }
     });
-  };
+  });
 
   const emitter = function(...args){
     const ret = func(...args);
