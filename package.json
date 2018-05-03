@@ -1,6 +1,6 @@
 {
   "name": "callbag-from-function",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Create a callbag source from a function",
   "repository": {
     "type": "git",
