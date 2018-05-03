@@ -4,27 +4,18 @@ const fromFunction = require('./index');
 const makeMock = require('callbag-mock');
 
 test('it emits function return values until unsub', t => {
-
-  let received = [];
-  const report = (name,dir,t,d) => t === 1 && received.push(d);
-  const sink = makeMock('sink', report);
-
-  const logic = (...args) => args.join('-');
-  const {source, emitter} = fromFunction(logic);
-
+  const sink = makeMock();
+  const {source, emitter} = fromFunction((...args) => args.join('-'));
   emitter('foo'); // won't be received since we're not subscribed yet
-
   source(0, sink); // start subscription
-
   emitter('bar', 456);
   emitter('baz', 7, 8, 9);
-
   sink.emit(2); // stop subscription
-
   emitter('bin'); // won't be received since we stopped subscribing
-
-  t.deepEqual(received, ['bar-456', 'baz-7-8-9'], 'all return values are emitted');
-
+  t.deepEqual(
+    sink.getReceivedData(),
+    ['bar-456', 'baz-7-8-9'], 'all return values are emitted'
+  );
   t.end();
 });
 
@@ -35,25 +26,23 @@ test('the emitter passes on the return value', t => {
 });
 
 test('it should default to identity function', t => {
-  let received = [];
-  const report = (name,dir,t,d) => t === 1 && received.push(d);
-  const sink = makeMock('sink', report);
+  const sink = makeMock();
   const {source, emitter} = fromFunction();
   source(0, sink);
   emitter('foo');
-  t.deepEqual(received, ['foo']);
+  t.deepEqual(sink.getReceivedData(), ['foo']);
   t.end();
 });
 
 test('the source should be shared', t => {
   let first, second;
-  const sink1 = makeMock('sink1', (name,dir,t,d) => t === 1 && (first = true));
-  const sink2 = makeMock('sink2', (name,dir,t,d) => t === 1 && (second = true));
+  const sink1 = makeMock();
+  const sink2 = makeMock();
   const {source, emitter} = fromFunction();
   source(0, sink1);
   source(0, sink2);
-  emitter();
-  t.ok(first);
-  t.ok(second);
+  emitter('stuff');
+  t.deepEqual(sink1.getReceivedData(), ['stuff']);
+  t.deepEqual(sink2.getReceivedData(), ['stuff']);
   t.end();
 });
