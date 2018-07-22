@@ -1,6 +1,6 @@
 const test = require('tape');
 
-const fromFunction = require('./index');
+const fromFunction = require('.');
 const makeMock = require('callbag-mock');
 
 test('it emits function return values until unsub', t => {
