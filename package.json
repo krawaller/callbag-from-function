@@ -6,9 +6,13 @@
     "type": "git",
     "url": "git+https://github.com/krawaller/callbag-from-function.git"
   },
-  "main": "index.js",
+  "main": "index.cjs.js",
+  "module": "index.js",
   "scripts": {
-    "test": "tape test.js"
+    "build": "rollup $npm_package_module -o $npm_package_main --f cjs --no-interop --external callbag-share",
+    "pretest": "npm run build",
+    "test": "tape test.js",
+    "prepare": "npm test"
   },
   "author": "David Waller",
   "license": "MIT",
@@ -17,6 +21,7 @@
   ],
   "devDependencies": {
     "callbag-mock": "^2.0.0",
+    "rollup": "^0.63.4",
     "tape": "^4.9.0"
   },
   "dependencies": {

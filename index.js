@@ -1,6 +1,6 @@
-const share = require('callbag-share');
+import share from 'callbag-share';
 
-module.exports = function fromFunction(func = a => a) {
+export default function fromFunction(func = a => a) {
 
   let listenerTalkback;
 
