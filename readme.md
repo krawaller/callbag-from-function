@@ -30,7 +30,7 @@ const newName = str => ({type: 'NEWNAME', value: str});
 
 const {source: newName$, emitter: wrappedNewName} = fromFunction(newName);
 
-const forEach(newName$)(a => console.log("New name:", a.value));
+forEach(a => console.log("New name:", a.value))(newName$);
 
 wrappedNewName("Batman"); // New name: Batman
 ```
