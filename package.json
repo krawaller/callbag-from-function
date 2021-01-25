@@ -7,6 +7,7 @@
     "url": "git+https://github.com/krawaller/callbag-from-function.git"
   },
   "main": "index.cjs.js",
+  "types": "index.d.ts",
   "module": "index.js",
   "scripts": {
     "build": "rollup $npm_package_module -o $npm_package_main --f cjs --no-interop --external callbag-share",
@@ -25,6 +26,7 @@
     "tape": "^4.9.0"
   },
   "dependencies": {
+    "callbag": "^1.2.0",
     "callbag-share": "^1.0.0"
   }
 }
