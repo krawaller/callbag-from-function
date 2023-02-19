@@ -2,6 +2,7 @@ const test = require('tape');
 
 const fromFunction = require('.');
 const makeMock = require('callbag-mock');
+const last = require('callbag-last');
 
 test('it emits function return values until unsub', t => {
   const sink = makeMock();
@@ -44,5 +45,30 @@ test('the source should be shared', t => {
   emitter('stuff');
   t.deepEqual(sink1.getReceivedData(), ['stuff']);
   t.deepEqual(sink2.getReceivedData(), ['stuff']);
+  t.end();
+});
+
+test('we can send finish signal to callbag-from-function', t => {
+  const sink = makeMock();
+  const {source, emitter, finish} = fromFunction();
+  source(0, sink);
+  emitter('foo');
+  finish() // finish signal for the callbag-from-function
+  emitter('mlk'); // won't be received since we finish the callbag-from-function
+  t.deepEqual(sink.getReceivedData(), ['foo']);
+  t.end();
+});
+
+test('we can finish and we get the last element', t => {
+  const sink = makeMock();
+  const {source, emitter, finish} = fromFunction();
+  last()(source)(0, sink);
+  emitter('have');
+  emitter('a');
+  emitter('good');
+  emitter('day!');
+  finish() // finish signal for the callbag-from-function
+  emitter('mlk'); // won't be received since we finish the callbag-from-function
+  t.deepEqual(sink.getReceivedData(), ['day!']);
   t.end();
 });
