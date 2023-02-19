@@ -1,6 +1,6 @@
 {
   "name": "callbag-from-function",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Create a callbag source from a function",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "main": "index.cjs.js",
   "module": "index.js",
   "scripts": {
-    "build": "rollup $npm_package_module -o $npm_package_main --f cjs --no-interop --external callbag-share",
+    "build": "rollup index.js --file index.cjs.js --format cjs --external callbag-share",
     "pretest": "npm run build",
     "test": "tape test.js",
     "prepare": "npm test"
@@ -20,11 +20,12 @@
     "callbag"
   ],
   "devDependencies": {
-    "callbag-mock": "^2.0.0",
-    "rollup": "^0.63.4",
-    "tape": "^4.9.0"
+    "callbag-last": "^1.1.4",
+    "callbag-mock": "^2.3.0",
+    "rollup": "^3.17.1",
+    "tape": "^5.6.3"
   },
   "dependencies": {
-    "callbag-share": "^1.0.0"
+    "callbag-share": "^1.3.0"
   }
 }

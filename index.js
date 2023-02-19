@@ -21,6 +21,8 @@ export default function fromFunction(func = a => a) {
     }
     return ret;
   };
+  
+  const finish = () => listenerTalkback(2);
 
-  return {source, emitter};
+  return {source, emitter, finish};
 }
